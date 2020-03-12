@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 import Persons from '../components/Persons'
 import Cockpit from '../components/Cockpit';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
 
-import classes from './App';
+import classes from './App.css';
 
 class App extends Component {
   state = {
@@ -15,6 +17,19 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps');
+    return state;
+  }
+
+  componentWillMount(){
+    console.log('[App.js] componentWillMount');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -55,15 +70,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <Aux>
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonHandler} />
         {persons}
-      </div>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
