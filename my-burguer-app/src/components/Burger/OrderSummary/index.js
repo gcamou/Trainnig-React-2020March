@@ -1,5 +1,6 @@
 import React from 'react';
 import Aux from '../../../hoc/Aux';
+import Button from '../../UI/Button';
 
 const orderSummary = (props) => {
 
@@ -7,7 +8,7 @@ const orderSummary = (props) => {
         .map(igKey => {
             return (
                 <li key={igKey}>
-                    <spam style={{ textTransform: 'capitalize' }} >{igKey}:</spam> {props.ingredients[igKey]}
+                    <span style={{ textTransform: 'capitalize' }} >{igKey}:</span> {props.ingredients[igKey]}
                 </li>
             );
         });
@@ -19,6 +20,9 @@ const orderSummary = (props) => {
             <ul>
                 {summaryIngredients}
             </ul>
+            <p>Continue to checkout?</p>
+            <Button btnType='Danger' clicked={props.cancelled}>CANCEL</Button>
+            <Button btnType='Success' clicked={props.continue}>CONTINUE</Button>
         </Aux>
     );
 }
