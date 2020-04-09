@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Component }  from 'react';
 
 import Modal from '../../components/UI/Modal';
 import Aux from '../Aux';
-import { Component } from 'react';
 
 const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component {
@@ -20,6 +19,10 @@ const withErrorHandler = (WrappedComponent, axios) => {
             })
         }
 
+        componentWillUnmount () {
+            axios.interceptors.request.eject( this.reqInterceptor );
+            axios.interceptors.response.eject( this.resInterceptor );
+        }
         
         errorConfirmedHandler = () => {
             this.setState({ error: null });
